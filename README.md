@@ -15,18 +15,12 @@ Processes raw `.dat` files from a Quantum Design MPMS3 magnetometer.
 **What it does:**
 
 - Parses the 44-line Quantum Design header and groups measurements by applied field
-- Computes volume fraction susceptibility:
-
-$$\chi_{\text{vol}} = \frac{M}{H} \cdot \frac{4\pi}{V}$$
-
-where $V = m/\rho$ is the sample volume. Supports a powder packing density correction.
-
-- Plots $\chi_{\text{vol}}$ vs temperature at two fields to show the Meissner shielding fraction
+- Computes and plots normalized volume fraction susceptibility at two applied fields to show the Meissner shielding transition
 - Fits the normal-state susceptibility to a Curie-Weiss model above $T_c$:
 
 $$\chi(T) = \frac{C}{T - \theta_{\text{CW}}} + \chi_0$$
 
-- Plots normalized susceptibility $\chi/|\chi|_{\text{max}}$ vs temperature and marks $T_c$ with a vertical line
+- Plots normalized susceptibility $\chi/|\chi|_{\text{max}}$ vs temperature at a single field and marks $T_c$ with a vertical line
 
 **Sample data:** `data/ZrV2_sample.dat` — DC magnetometry of a ZrV$_2$ single crystal measured at 10 Oe and 10,000 Oe from 1.8 K to 20 K.
 
@@ -41,7 +35,7 @@ Extracts unit cell volumes from a series of `.cif` files produced by Rietveld re
 - Parses `_cell_volume` from each `.cif` file using regex
 - Pairs each volume with a temperature from a log file by trial number
 - Fits a linear model $V(T) = a \cdot T + b$ to extract the volumetric thermal expansion rate $dV/dT$ with uncertainties from the covariance matrix
-- Produces two plots: raw cell volume with fit, and volume normalized to the highest-temperature measurement
+- Produces two plots: raw cell volume with linear fit, and volume normalized to the highest-temperature measurement
 
 **Sample data:** `data/cif/` — 6 refinements of a ZrV$_2$ sample cooled from 278 K to 100 K. `data/refinement.log` — temperature log pairing each refinement to its measurement temperature.
 
